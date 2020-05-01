@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitLab TODO API</title>
+    <style>body{text-align: center;}</style>
+</head>
+<body>
+    <h1>- GitLab TODO API example -</h1>
+    <h3>- check console to see data -</h3>
+    <script>
+        var request = new XMLHttpRequest()
+        request.open('GET', 'https://gitlab.com/api/v4/todos', true)
+        request.setRequestHeader("PRIVATE-TOKEN","<MY_API_KEY>")
+        request.onload = function() {
+            var data = JSON.parse(this.response)
+            data.forEach(x => {
+                console.log(x.id)
+                console.log(x.target.title)
+                console.log(x.target.web_url)
+                console.log("")
+            })
+        }
+        request.send()
+    </script>
+</body>
+</html>
