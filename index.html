@@ -10,19 +10,40 @@
     <h1>- GitLab TODO API example -</h1>
     <h3>- check console to see data -</h3>
     <script>
-        var request = new XMLHttpRequest()
-        request.open('GET', 'https://gitlab.com/api/v4/todos', true)
-        request.setRequestHeader("PRIVATE-TOKEN","<MY_API_KEY>")
-        request.onload = function() {
-            var data = JSON.parse(this.response)
+
+        // FETCH API => GOOD WAY
+        fetch('https://gitlab.com/api/v4/todos', {
+            method: 'GET',
+            withCredentials: true,
+            headers: {
+                "PRIVATE-TOKEN": "<_YOUR_API_KEY_>",
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then( data => {
             data.forEach(x => {
                 console.log(x.id)
                 console.log(x.target.title)
                 console.log(x.target.web_url)
                 console.log("")
             })
-        }
-        request.send()
+        })
+
+        // DEPRECATED
+        // var request = new XMLHttpRequest()
+        // request.open('GET', 'https://gitlab.com/api/v4/todos', true)
+        // request.setRequestHeader("PRIVATE-TOKEN","<_YOUR_API_KEY_>")
+        // request.onload = function() {
+        //     var data = JSON.parse(this.response)
+        //     data.forEach(x => {
+        //         console.log(x.id)
+        //         console.log(x.target.title)
+        //         console.log(x.target.web_url)
+        //         console.log("")
+        //     })
+        // }
+        // request.send()
     </script>
 </body>
 </html>
